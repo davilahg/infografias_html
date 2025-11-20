@@ -65,7 +65,7 @@ Podrás ver una vista previa del documento antes de descargarlo.
 st.divider()
 
 # Subida de archivo
-st.subheader("1️⃣ Sube tu plantilla HTML")
+st.subheader("1. Sube tu plantilla HTML")
 template_file = st.file_uploader(
     "Selecciona tu archivo de plantilla",
     type=['html'],
@@ -73,7 +73,7 @@ template_file = st.file_uploader(
 )
 
 # Ejemplo opcional
-with st.expander("💡 Ejemplo de plantilla HTML"):
+with st.expander("Ejemplo de plantilla HTML"):
     st.code("""
 <!DOCTYPE html>
 <html>
@@ -106,7 +106,7 @@ if template_file:
     if not placeholders:
         st.warning("⚠️ No se encontraron placeholders en la plantilla (usa el formato {{nombre}}).")
     else:
-        st.subheader("2️⃣ Completa los campos detectados en la plantilla")
+        st.subheader("2. Completa los campos detectados en la plantilla")
 
         # Formulario dinámico
         with st.form("formulario_html"):
@@ -135,7 +135,7 @@ if template_file:
         if submitted:
             html_final = rellenar_plantilla(template, datos)
 
-            st.success("✅ ¡HTML generado exitosamente!")
+            st.success("✅ HTML generado exitosamente")
             st.divider()
 
             tab1, tab2 = st.tabs(["👁️ Vista Previa", "📝 Código HTML"])
@@ -154,4 +154,4 @@ if template_file:
             )
 
 st.divider()
-st.caption("Hecho con ❤️ usando Streamlit")
+st.caption("Hecho con Streamlit")
