@@ -58,8 +58,8 @@ PLACEHOLDER_INFO = {
 # --- Interfaz ---
 st.title("📄 Generador de HTML")
 st.markdown("""
-Sube tu plantilla HTML con placeholders (por ejemplo `{{nombre}}`, `{{email}}`) y completa los campos generados automáticamente.  
-Podrás ver una vista previa del documento antes de descargarlo.
+Sube tu plantilla HTML con placeholders, marcados con llaves (por ejemplo `{{nombre}}`, `{{fecha}}`), y completa los campos generados a partir de tus placeholders.  
+Se puede ver una vista previa del documento antes de descargarlo.
 """)
 
 st.divider()
@@ -69,7 +69,7 @@ st.subheader("1. Sube tu plantilla HTML")
 template_file = st.file_uploader(
     "Selecciona tu archivo de plantilla",
     type=['html'],
-    help="Tu plantilla debe contener placeholders como {{nombre}}, {{email}}, etc."
+    help="Tu plantilla debe contener placeholders como {{nombre}}, {{fecha}}, etc."
 )
 
 # Ejemplo opcional
@@ -82,8 +82,8 @@ with st.expander("Ejemplo de plantilla HTML"):
 </head>
 <body>
   <h1>Hola {{nombre}}</h1>
-  <p>Email: {{email}}</p>
-  <p>Teléfono: {{telefono}}</p>
+  <p>Hoy es: {{fecha}}</p>
+  <p>Contacto: {{telefono}}</p>
   <p>{{mensaje}}</p>
 </body>
 </html>
@@ -95,8 +95,8 @@ if template_file:
     st.success("✅ Plantilla cargada correctamente")
     
     # Opción para ver vista previa
-    if st.checkbox("👁️ Ver vista previa de la plantilla original"):
-        st.info("Vista previa de cómo se ve tu plantilla con los placeholders aún sin reemplazar:")
+    if st.checkbox("Mostrar vista previa de la plantilla original"):
+        st.info("Vista previa de cómo se ve la plantilla con los placeholders aún sin reemplazar:")
         st.components.v1.html(template, height=500, scrolling=True)
         st.divider()
 
@@ -130,15 +130,15 @@ if template_file:
                     )
 
             st.divider()
-            submitted = st.form_submit_button("🚀 Generar HTML", use_container_width=True, type="primary")
+            submitted = st.form_submit_button("Generar HTML", use_container_width=True, type="primary")
 
         if submitted:
             html_final = rellenar_plantilla(template, datos)
 
-            st.success("✅ HTML generado exitosamente")
+            st.success("HTML generado exitosamente")
             st.divider()
 
-            tab1, tab2 = st.tabs(["👁️ Vista Previa", "📝 Código HTML"])
+            tab1, tab2 = st.tabs(["Vista Previa", "Código HTML"])
             with tab1:
                 st.components.v1.html(html_final, height=500, scrolling=True)
             with tab2:
@@ -146,7 +146,7 @@ if template_file:
 
             st.divider()
             st.download_button(
-                label="⬇️ Descargar HTML",
+                label="Descargar HTML",
                 data=html_final,
                 file_name="documento_generado.html",
                 mime="text/html",
